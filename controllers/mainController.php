@@ -31,6 +31,15 @@ class mainController {
 					case 2: $args='-a';
 					break;
 					case 3: $imageArray=$this->containerModel->getImages();
+						if(@get_class($imageArray)=='Notification')
+						{
+						$this->lastNotification=$imageArray;
+						echo '<div class="row"><div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-1 main">';
+						include 'views/notificationView.php';
+						echo '<a href="index.php">Return to Dashboard</a>';
+						echo '</div></div>';
+						return;
+						}
 					include 'views/createContainerView.php';
 					return;
 					default : break;
