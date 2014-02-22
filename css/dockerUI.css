@@ -1,0 +1,18 @@
+
+.navbar-notification-success
+{
+	color:green;
+}
+.navbar-notification-warning
+{
+	color:orange;
+}
+.navbar-notification-danger
+{
+	color:red;
+}
+
+@media (min-width:768px)
+{
+	
+}
