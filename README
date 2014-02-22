@@ -1,7 +1,27 @@
-##ALPHA VERSION##
+##ALPHA VERSION## 22.02.2014
 
 -What you can do with this version-
 ->Create containers
 ->Start/Stop/Delete/Restart containers
 
 -->More to come
+
+-Requirements- (with Ubuntu 12.04)
+
+apt-get install apache2 (libssh2 won't work with apache2.4)
+apt-get install php5
+apt-get install libssh2-1-dev libssh2-php 
+Install docker -> http://docs.docker.io/en/latest/installation/ubuntulinux/
+create user for docker + add user to docker group (make sure your user has access to docker command + ssh)
+modify models/settingModel.php with the proper config file path.
+
+-When the website is up and running
+--> Create new config file with ssh credentials (in Settings menu)
+--> Create at least one image on your docker server. for example : docker pull triangle/ubuntu-saucy (you can search images using docker search or create your own using a dockerfile)
+
+-To do-
+
+
+-Links-
+http://www.howtogeek.com/howto/ubuntu/installing-php5-and-apache-on-ubuntu/
+http://kvz.io/blog/2007/07/24/make-ssh-connections-with-php/
