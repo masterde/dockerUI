@@ -5,6 +5,10 @@ include_once("settingModel.php");
 include_once("Setting.php");  
 
 class containerModel { 
+	//new Container("1", "Container1", "Image1","hostname1","193.168.10.1","1min"),
+	
+	
+	//docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
 	
 	private $settings;
 	private $settingModel;
@@ -181,6 +185,10 @@ class containerModel {
 		if (!$connection) return new Notification(notificationType::Danger,'Error!', 'SSH connection to host '.$this->settings->host.':'.$this->settings->port.' failed ! Check the port and that the service is running.'.$this->settings->host.'-'. intval($this->settings->port));		
 		ssh2_auth_password($connection, $this->settings->user,$this->settings->password);
 		
+		//get number of images
+		$stream = ssh2_exec($connection,"docker images | wc -l");
+		stream_set_blocking($stream, true);
+		if(stream_get_contents($stream)==1)return new Notification(notificationType::Danger,'Error!', 'No image available ! Please use <code>docker pull [image-name]</code> on the server. @ '.$this->settings->host);
 		//get Images Names and Size+Unit
 		$stream = ssh2_exec($connection,"docker images | awk '{print($1\"  (\"$7$8\")#\")}' | sed -n '1!p'");
 		$errorStream = ssh2_fetch_stream($stream, SSH2_STREAM_STDERR);
